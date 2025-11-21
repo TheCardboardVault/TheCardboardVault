@@ -41,17 +41,18 @@ app.get('/api/deals', async (req, res) => {
         if (search && search.trim() !== '') {
             console.log(`[API] Triggering scrape for: "${search}"`);
 
-            // Import scraper
-            const { scrapeAll } = require('./scrapers');
+            // // Import scraper
+            // const { scrapeAll } = require('./scrapers');
 
-            // Run scrape and wait for it to complete
-            try {
-                const count = await scrapeAll(search, mongoose);
-                console.log(`[API] Scrape completed: ${count} deals found`);
-            } catch (scrapeErr) {
-                console.error(`[API] Scrape error:`, scrapeErr.message);
-                // Continue to search DB even if scrape fails
-            }
+            // // Run scrape and wait for it to complete
+            // try {
+            //     const count = await scrapeAll(search, mongoose);
+            //     console.log(`[API] Scrape completed: ${count} deals found`);
+            // } catch (scrapeErr) {
+            //     console.error(`[API] Scrape error:`, scrapeErr.message);
+            //     // Continue to search DB even if scrape fails
+            // }
+            console.log('[API] Scraping temporarily disabled for deployment.');
         }
 
         // Build query
@@ -89,15 +90,16 @@ app.post('/api/scrape', async (req, res) => {
             return res.status(400).json({ message: 'searchTerm is required' });
         }
 
-        // Import scraper
-        const { scrapeAll } = require('./scrapers');
+        // // Import scraper
+        // const { scrapeAll } = require('./scrapers');
 
-        // Run scrape in background (don't await)
-        scrapeAll(searchTerm, mongoose).then(count => {
-            console.log(`[API] Scrape for "${searchTerm}" completed: ${count} deals`);
-        }).catch(err => {
-            console.error(`[API] Scrape for "${searchTerm}" failed:`, err.message);
-        });
+        // // Run scrape in background (don't await)
+        // scrapeAll(searchTerm, mongoose).then(count => {
+        //     console.log(`[API] Scrape for "${searchTerm}" completed: ${count} deals`);
+        // }).catch(err => {
+        //     console.error(`[API] Scrape for "${searchTerm}" failed:`, err.message);
+        // });
+        console.log('[API] Scraping temporarily disabled for deployment.');
 
         res.json({
             message: `Scraping for "${searchTerm}" initiated. Check back in a moment!`,
