@@ -7,6 +7,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Settings from './components/Settings';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
 function App() {
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,8 +27,8 @@ function App() {
     try {
       // In a real app, you'd append the search term to the query
       const url = searchTerm
-        ? `http://localhost:5001/api/deals?search=${encodeURIComponent(searchTerm)}`
-        : 'http://localhost:5001/api/deals';
+        ? `${API_URL}/api/deals?search=${encodeURIComponent(searchTerm)}`
+        : `${API_URL}/api/deals`;
 
       const response = await fetch(url);
       if (!response.ok) throw new Error('Failed to fetch');

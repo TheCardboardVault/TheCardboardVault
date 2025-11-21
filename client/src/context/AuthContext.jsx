@@ -2,6 +2,8 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext();
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
 export const useAuth = () => {
     const context = useContext(AuthContext);
     if (!context) {
@@ -21,7 +23,7 @@ export const AuthProvider = ({ children }) => {
             const storedToken = localStorage.getItem('token');
             if (storedToken) {
                 try {
-                    const response = await fetch('http://localhost:5001/api/auth/me', {
+                    const response = await fetch(`${API_URL}/api/auth/me`, {
                         headers: {
                             'Authorization': `Bearer ${storedToken}`
                         }
@@ -56,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
     const register = async (username, email, password) => {
         try {
-            const response = await fetch('http://localhost:5001/api/auth/register', {
+            const response = await fetch(`${API_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -83,7 +85,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = await fetch('http://localhost:5001/api/auth/login', {
+            const response = await fetch(`${API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -110,7 +112,7 @@ export const AuthProvider = ({ children }) => {
 
     const updateProfile = async (updates) => {
         try {
-            const response = await fetch('http://localhost:5001/api/auth/update', {
+            const response = await fetch(`${API_URL}/api/auth/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -135,7 +137,7 @@ export const AuthProvider = ({ children }) => {
 
     const claimReward = async (action) => {
         try {
-            const response = await fetch('http://localhost:5001/api/auth/reward', {
+            const response = await fetch(`${API_URL}/api/auth/reward`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
