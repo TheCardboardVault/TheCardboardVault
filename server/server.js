@@ -15,7 +15,11 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((error) => console.error('Error connecting to MongoDB:', error));
 
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:5001'], // Allow Vite dev server and API calls
+    origin: [
+        'http://localhost:5173',
+        'http://localhost:5001',
+        'https://thecardboardvault.github.io' // GitHub Pages frontend
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
